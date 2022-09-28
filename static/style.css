@@ -1,0 +1,48 @@
+a{
+    text-decoration: none;
+    color: black;
+}
+
+table{
+    margin: 3em;
+}
+
+tr {
+   cursor: pointer;
+}
+
+td {
+    width: 10%;
+    color: grey;
+    padding-top: 15px;
+}
+
+th:first-child, td:first-child{
+    text-align: start;
+    width: 15%;
+}
+
+#playlist{
+    text-align: center;
+}
+
+.active{
+    font-weight: bold;
+}
+
+audio {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+input[type=submit], input::file-selector-button, button {
+    font-weight: bold;
+    color: black;
+    padding: 0.5em;
+    background-color: white;
+    border: thin solid black;
+    cursor: pointer;
+}
+
