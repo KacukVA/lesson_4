@@ -1,9 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Music library</title>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Lesson 4</title>
 </head>
 <body>
+<h1>Music library</h1>
+<hr>
+<p>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flashes>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</p>
+<h3>Select audio to upload [.mp3]</h3>
+<form action="/" method="POST" enctype="multipart/form-data">
+    <input type="file" accept=".mp3,audio/*" name="file">
+    <input type="submit" value="Submit"/>
+</form>
+<audio id="audio" tabindex="0" controls>
+    <source type="audio/mp3" src="">
+    Sorry, your browser does not support HTML5 audio.
+</audio>
+<br><hr>
+<table id="playlist">
+  <tr>
+    <th>Title</th>
+    <th>Artist</th>
+    <th>Album</th>
+    <th>Duration</th>
+  </tr>
+    {% for file in files %}
+        <tr>
+            <td><a href="{{ url_for('stream', filename=file[0]) }}">{{ file[1] }}</a></td>
+            <td>{{ file[2] }}</td>
+            <td>{{ file[3] }}</td>
+            <td>{{ file[4] }}</td>
+            <td>
+                <form method="post"><button type="submit" value="{{ file[5] }}" name="delete">Delete</button></form>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
 </body>
+<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js "></script>
+<script type="text/javascript" src="{{ url_for('static', filename='player.js') }}"></script>
 </html>
